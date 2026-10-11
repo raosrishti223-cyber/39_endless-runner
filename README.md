@@ -47,21 +47,28 @@ Each task must be completed using an iterative process involving LLM suggestions
 
 > The game speeds up forever with no limit, and once it's fast enough obstacles can zip past the player without the hit ever registering. Investigate and enhance collision accuracy (and/or the speed ramp) so it stays fair no matter how long a run lasts.
 
+The engine checks the full horizontal path each obstacle travels per frame and caps its speed at 14 pixels per frame, preventing tunneling while keeping the difficulty bounded.
+
 
 ### Task 2: Implement Game Over Condition
 
 > Add a screen that displays the final score once the player collides with an obstacle, then gracefully waits for input instead of just printing to the console.
+
+On collision, gameplay freezes and a Game Over overlay displays the final score. Choose E, M, or H to replay at the selected difficulty, or press Esc to exit; closing the window also exits.
 
 
 ### Task 3: Add Replay Option
 
 > After Game Over, allow the user to play again by choosing a difficulty (Easy, Medium, or Hard starting speed/spawn rate), or exit.
 
+After Game Over, press E for Easy (speed 4, spawn interval 90 frames), M for Medium (speed 6, interval 70), or H for Hard (speed 10, interval 50) to start a fresh run. Press Esc or close the window to exit.
 
 
 ### Task 4: Add Sound Feedback
 
 > Add basic sound effects for jumping, passing an obstacle (scoring), and the game-over moment.
+
+Short jump, score, and game-over tones are generated when the game starts, so no sound asset files are required. If the audio device or mixer is unavailable, gameplay continues with sound disabled.
 
 
 
@@ -84,6 +91,7 @@ endless-runner-main/
 ├── requirements.txt
 ├── game/
 │   ├── game_engine.py
+│   ├── audio.py
 │   ├── player.py
 │   └── obstacle.py
 └── README.md
@@ -98,4 +106,3 @@ Submission is only the following three things:
 - [] A 10-second video of gameplay **before** your changes, showing the bug/broken behavior
 - [] A 10-second video of gameplay **after** your changes, showing the bug fixed and the new features working
 - [] The Chat/LLM used page link, with the complete chat history
-
